@@ -1,4 +1,5 @@
 import { useState, useMemo, useCallback, useRef } from "react"
+import { InputLogin } from "./components/inputLogin";
 
 export const Login = () => {
     const inputPasswordRef = useRef<HTMLInputElement>(null);
@@ -18,20 +19,21 @@ export const Login = () => {
     return(
         <div>
             <form>
-                <p>Quantidade de caracteres no email: {emailLength}</p>
-                <label>
-                    <span>Email</span>
-                    <input 
-                        value={email} 
-                        onChange={e => setEmail(e.target.value)}
-                        onKeyDown={e => e.key === 'Enter' ? inputPasswordRef.current?.focus() : undefined}
-                        />
-                </label>
 
-                <label>
-                    <span>Senha</span>
-                    <input ref={inputPasswordRef} type="password" value={senha} onChange={e => setSenha(e.target.value)}/>
-                </label>
+                <InputLogin 
+                    label="Email"
+                    value={email}
+                    onChange={newValue => setEmail(newValue)}
+                    onPressEnter={() => inputPasswordRef.current?.focus()}
+                />
+
+                <InputLogin 
+                    type="password"
+                    label="Senha"
+                    value={senha}
+                    onChange={newValue => setSenha(newValue)}
+                />
+            
 
                 <button type="button" onClick={handleEntrar}>
                     Entrar
